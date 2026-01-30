@@ -44,7 +44,7 @@ st.set_page_config(
 # -------------------------------
 @st.cache_data
 def load_data():
-    return pd.read_csv("C:/Users/USER/stream_lab/datasets/crm_final_clean_tb.csv")
+    return pd.read_csv("datasets/crm_final_clean_tb.csv")
 
 df = load_data()
 
@@ -52,7 +52,7 @@ df = load_data()
 # Sidebar - logo entreprise
 # -------------------------------
 st.sidebar.image(
-    r"C:/Users/USER/stream_lab/assets/zamani.jpg",
+    r"assets/zamani.jpg",
     width=180  # taille moyenne, ajuste si besoin
 )
 
@@ -176,7 +176,7 @@ from KPIs import filtre_dataframe
 
 # Chargement du DataFrame CRM depuis ton fichier CSV
 crm_final_clean_tb = pd.read_csv(
-    r"C:/Users/USER/stream_lab/datasets/crm_final_clean_tb.csv"
+    r"datasets/crm_final_clean_tb.csv"
 )
 
 # Appel de la fonction d’affichage avec filtre
