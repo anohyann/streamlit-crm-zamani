@@ -3,15 +3,20 @@ import plotly.express as px
 import pandas as pd
 
 def display_comptes_par_secteur(df):
+    # --- Nettoyage des libellés ---
+    df['sector'] = df['sector'].astype(str).str.strip().str.title()  # uniformiser
+    
     # --- Agrégation du nombre de comptes par secteur ---
     df_secteur = df.groupby('sector').size().reset_index(name='nb_comptes')
     df_secteur = df_secteur.sort_values(by='nb_comptes', ascending=True)
 
+    # --- Vérification si vide ---
+    if df_secteur.empty:
+        st.warning("⚠️ Aucune donnée disponible pour les secteurs.")
+        return
+
     # --- Titre explicatif ---
-    st.markdown(
-        "<h3 style='color:#333333; font-weight:bold;'>Répartition des comptes par secteur</h3>", 
-        unsafe_allow_html=True
-    )
+    st.subheader("🏢 Répartition des comptes par secteur")
 
     # --- Graphique interactif ---
     fig = px.bar(

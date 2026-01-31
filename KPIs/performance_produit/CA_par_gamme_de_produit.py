@@ -3,14 +3,16 @@ import plotly.express as px
 import pandas as pd
 
 def display_CA_par_gamme_de_produit(df):
+    # --- Nettoyage des libellés ---
+    df['series'] = df['series'].str.strip().str.upper()
+    gammes_valides = ["GTK", "GTX", "MG"]
+    df = df[df['series'].isin(gammes_valides)]
+
     # --- Agrégation du CA par produit et série ---
     df_ca_gamme = df.groupby(['series', 'product'])['close_value'].sum().reset_index()
 
     # --- Titre explicatif ---
-    st.markdown(
-        "<h3 style='color:#333333; font-weight:bold;'>Chiffre d’affaires par gamme et produit</h3>", 
-        unsafe_allow_html=True
-    )
+    st.subheader("💰 Chiffre d’affaires par gamme et produit")
 
     # --- Bar chart groupé interactif ---
     fig = px.bar(
